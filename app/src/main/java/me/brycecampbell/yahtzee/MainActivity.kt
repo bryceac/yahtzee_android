@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import me.brycecampbell.yahtzee.ui.theme.YahtzeeTheme
 
 class MainActivity : ComponentActivity() {
-    val upperKeys: Array<String> by lazy {
+    private val upperKeys: Array<String> by lazy {
         arrayOf(
             getString(R.string.one_key),
             getString(R.string.two_key),
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    val lowerKeys: Array<String> by lazy {
+    private val lowerKeys: Array<String> by lazy {
         arrayOf(
             getString(R.string.three_of_kind_key),
             getString(R.string.four_of_kind_key),
@@ -41,17 +41,18 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    lateinit var state: MutableState<Game>
+    private lateinit var state: MutableState<Game>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            state = remember { mutableStateOf(Game(upperKeys = upperKeys.map { it.toInt() }.toTypedArray(), lowerKeys = lowerKeys))}
             YahtzeeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     Column {
-                        UpperSection(game = game)
-                        PlayArea(game = game)
+                        UpperSection()
+                        PlayArea()
                     }
                 }
             }
@@ -59,27 +60,26 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun UpperSection(game: Game) {
-        var game = remember { mutableStateOf(game) }
+    fun UpperSection() {
 
-        var gameCopy = game.value.clone() as Game
+        var game = state.value.clone() as Game
 
         Row {
-            for (key in gameCopy.upperKeys) {
+            for (key in game.upperKeys) {
                 Column {
                     Text("$key")
 
-                    if (gameCopy.scoreboard.upperSection[key] != null) {
-                        val points = gameCopy.scoreboard.upperSection[key]!!
+                    if (game.scoreboard.upperSection[key] != null) {
+                        val points = game.scoreboard.upperSection[key]!!
 
                         Text("$points")
-                    } else if (gameCopy.rolls > 0) {
-                        val points = gameCopy.upperPossibilities[key]!!
+                    } else if (game.rolls > 0) {
+                        val points = game.upperPossibilities[key]!!
 
                         Button(onClick = {
-                            gameCopy.scoreboard.upperSection[key] = points
+                            game.scoreboard.upperSection[key] = points
 
-                            game.value = gameCopy
+                            state.value = game
                         }) {
                             Text("$points")
                         }
@@ -90,27 +90,26 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun PlayArea(game: Game) {
-        var game = remember { mutableStateOf(game) }
+    fun PlayArea() {
 
-        var gameCopy = game.value.clone() as Game
+        var game = state.value.clone() as Game
 
         Column {
             Row {
-                for (die in gameCopy.dice) {
+                for (die in game.dice) {
                     Button(onClick = {
                         die.isHeld = !die.isHeld
-                        game.value = gameCopy
+                        state.value = game
                     }) {
                         Text(if (die.number > 0) { "$die" } else { "?" })
                     }
                 }
             }
 
-            if (game.value.rolls < 3) {
+            if (state.value.rolls < 3) {
                 Button(onClick = {
-                    gameCopy.roll()
-                    game.value = gameCopy
+                    game.roll()
+                    state.value = game
                 }) {
                     Text("Roll")
                 }
@@ -121,11 +120,10 @@ class MainActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        var game = Game()
         YahtzeeTheme {
             Column {
-                UpperSection(game = game)
-                PlayArea(game = game)
+                UpperSection()
+                PlayArea()
             }
         }
     }
