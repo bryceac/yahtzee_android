@@ -57,76 +57,76 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
 
-@Composable
-fun UpperSection(game: Game) {
-    var game = remember { mutableStateOf(game) }
+    @Composable
+    fun UpperSection(game: Game) {
+        var game = remember { mutableStateOf(game) }
 
-    var gameCopy = game.value.clone() as Game
+        var gameCopy = game.value.clone() as Game
 
-    Row {
-        for (key in gameCopy.upperKeys) {
-            Column {
-                Text("$key")
+        Row {
+            for (key in gameCopy.upperKeys) {
+                Column {
+                    Text("$key")
 
-                if (gameCopy.scoreboard.upperSection[key] != null) {
-                    val points = gameCopy.scoreboard.upperSection[key]!!
+                    if (gameCopy.scoreboard.upperSection[key] != null) {
+                        val points = gameCopy.scoreboard.upperSection[key]!!
 
-                    Text("$points")
-                } else if (gameCopy.rolls > 0) {
-                    val points = gameCopy.upperPossibilities[key]!!
-
-                    Button(onClick = {
-                        gameCopy.scoreboard.upperSection[key] = points
-
-                        game.value = gameCopy
-                    }) {
                         Text("$points")
+                    } else if (gameCopy.rolls > 0) {
+                        val points = gameCopy.upperPossibilities[key]!!
+
+                        Button(onClick = {
+                            gameCopy.scoreboard.upperSection[key] = points
+
+                            game.value = gameCopy
+                        }) {
+                            Text("$points")
+                        }
                     }
                 }
             }
         }
     }
-}
 
-@Composable
-fun PlayArea(game: Game) {
-    var game = remember { mutableStateOf(game) }
+    @Composable
+    fun PlayArea(game: Game) {
+        var game = remember { mutableStateOf(game) }
 
-    var gameCopy = game.value.clone() as Game
+        var gameCopy = game.value.clone() as Game
 
-    Column {
-        Row {
-            for (die in gameCopy.dice) {
+        Column {
+            Row {
+                for (die in gameCopy.dice) {
+                    Button(onClick = {
+                        die.isHeld = !die.isHeld
+                        game.value = gameCopy
+                    }) {
+                        Text(if (die.number > 0) { "$die" } else { "?" })
+                    }
+                }
+            }
+
+            if (game.value.rolls < 3) {
                 Button(onClick = {
-                    die.isHeld = !die.isHeld
+                    gameCopy.roll()
                     game.value = gameCopy
                 }) {
-                    Text(if (die.number > 0) { "$die" } else { "?" })
+                    Text("Roll")
                 }
             }
         }
-
-        if (game.value.rolls < 3) {
-            Button(onClick = {
-                gameCopy.roll()
-                game.value = gameCopy
-            }) {
-                Text("Roll")
-            }
-        }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    var game = Game()
-    YahtzeeTheme {
-        Column {
-            UpperSection(game = game)
-            PlayArea(game = game)
+    @Preview(showBackground = true)
+    @Composable
+    fun DefaultPreview() {
+        var game = Game()
+        YahtzeeTheme {
+            Column {
+                UpperSection(game = game)
+                PlayArea(game = game)
+            }
         }
     }
 }
