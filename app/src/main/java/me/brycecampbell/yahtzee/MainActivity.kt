@@ -17,6 +17,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import me.brycecampbell.yahtzee.ui.theme.YahtzeeTheme
 
 class MainActivity : ComponentActivity() {
+    val upperKeys: Array<String> by lazy {
+        arrayOf(
+            getString(R.string.one_key),
+            getString(R.string.two_key),
+            getString(R.string.three_key),
+            getString(R.string.four_key),
+            getString(R.string.five_key),
+            getString(R.string.six_key)
+        )
+    }
+
+    val lowerKeys: Array<String> by lazy {
+        arrayOf(
+            getString(R.string.three_of_kind_key),
+            getString(R.string.four_of_kind_key),
+            getString(R.string.full_house_key),
+            getString(R.string.small_straight_key),
+            getString(R.string.large_straight),
+            getString(R.string.chance_key),
+            getString(R.string.five_of_kind_key)
+        )
+    }
+
     var game = Game()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

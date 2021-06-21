@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Yahtzee</string>
+    <string name="one_key">1</string>
+    <string name="two_key">2</string>
+    <string name="three_key">3</string>
+    <string name="four_key">4</string>
+    <string name="five_key">5</string>
+    <string name="six_key">6</string>
+    <string name="three_of_kind_key">3 of a Kind</string>
+    <string name="four_of_kind_key">4 of a Kind</string>
+    <string name="full_house_key">Full House</string>
+    <string name="small_straight_key">S Str</string>
+    <string name="large_straight">L Str</string>
+    <string name="chance_key">Chance</string>
+    <string name="five_of_kind_key">"Yahtzee"</string>
 </resources>
