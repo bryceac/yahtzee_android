@@ -17,9 +17,7 @@ fun List<Int>.countSequential(): Int {
                 }
             }
         } else if (sequentialSet.isNotEmpty()) {
-            val largestNumberInSequence = sequentialSet.reduce { largest: Int, num: Int ->
-                largest.coerceAtMost(num)
-            }
+            val largestNumberInSequence = sequentialSet.maxOrNull()!!
 
             if (largestNumberInSequence-value == 1) {
                 sequentialSet.add(value)
