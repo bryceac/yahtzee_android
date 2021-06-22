@@ -84,6 +84,10 @@ class MainActivity : ComponentActivity() {
 
                         Button(onClick = {
                             game.scoreboard.upperSection[key] = points
+
+                            if (Pair.pair(game.dice) == Pair.FIVE_OF_A_KIND && game.scoreboard.lowerSection[game.lowerKeys.last()] == 50) {
+                                game.scoreboard.numberOfYahtzeeBonsuses += 1
+                            }
                             game.rolls = 0
                             game.releaseDice()
                             state.value = game
@@ -121,6 +125,9 @@ class MainActivity : ComponentActivity() {
 
                             Button(onClick = {
                                 game.scoreboard.lowerSection[key] = points
+                                if (Pair.pair(game.dice) == Pair.FIVE_OF_A_KIND && game.scoreboard.lowerSection[game.lowerKeys.last()] == 50) {
+                                    game.scoreboard.numberOfYahtzeeBonsuses += 1
+                                }
                                 game.rolls = 0
                                 game.releaseDice()
                                 state.value = game
@@ -148,6 +155,10 @@ class MainActivity : ComponentActivity() {
 
                             Button(onClick = {
                                 game.scoreboard.lowerSection[key] = points
+                                if (Pair.pair(game.dice) == Pair.FIVE_OF_A_KIND && game.scoreboard.lowerSection[game.lowerKeys.last()] == 50) {
+                                    game.scoreboard.numberOfYahtzeeBonsuses += 1
+                                }
+
                                 game.rolls = 0
                                 game.releaseDice()
                                 state.value = game
