@@ -8,7 +8,8 @@ fun List<Int>.countSequential(): Int {
     for ((index, value) in uniqueValues.withIndex()) {
         if (value != uniqueValues.last()) {
             val nextIndex = index + 1
-            if (nextIndex <= uniqueValues.count()-1) {
+
+            if (nextIndex <= uniqueValues.indices.last()) {
                 val nextNumber = uniqueValues[nextIndex]
 
                 if (nextNumber != uniqueValues.last() && nextNumber-value == 1) {
@@ -19,8 +20,9 @@ fun List<Int>.countSequential(): Int {
         } else if (sequentialSet.isNotEmpty()) {
             val largestNumberInSequence = sequentialSet.maxOrNull()!!
 
-            if (largestNumberInSequence-value == 1) {
+            if (value-largestNumberInSequence == 1) {
                 sequentialSet.add(value)
+
             }
         }
     }
