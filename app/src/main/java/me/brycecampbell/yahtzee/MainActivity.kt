@@ -184,6 +184,7 @@ class MainActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
+        state = remember { mutableStateOf(Game()) }
         YahtzeeTheme {
             Column {
                 UpperSection()
