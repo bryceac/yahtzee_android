@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
 import me.brycecampbell.yahtzee.ui.theme.YahtzeeTheme
 
@@ -52,8 +51,14 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     Column {
                         UpperSection()
-                        LowerSection()
-                        PlayArea()
+                        // LowerSection()
+                        ScoreInfo()
+
+                        if (state.value.isOver) {
+                            GameOverArea()
+                        } else {
+                            PlayArea()
+                        }
                     }
                 }
             }
@@ -157,6 +162,33 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
+    fun ScoreInfo() {
+        var game = state.value.clone() as Game
+
+        Row {
+            Column {
+                Text("Upper Score")
+                Text("${game.scoreboard.upperScore}")
+            }
+
+            Column {
+                Text("Upper Bonus")
+                Text(if (game.scoreboard.gotUpperBonus) { "35" } else { "0" })
+            }
+
+            Column {
+                Text("Lower Score")
+                Text("${game.scoreboard.lowerScore}")
+            }
+
+            Column {
+                Text("${getString(R.string.five_of_kind_key)} Bonuses")
+                Text("${game.scoreboard.numberOfYahtzeeBonsuses}")
+            }
+        }
+    }
+
+    @Composable
     fun PlayArea() {
 
         var game = state.value.clone() as Game
@@ -184,6 +216,22 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @Composable
+    fun GameOverArea() {
+        var game = state.value.clone() as Game
+        Column {
+            Text("You scored ${game.scoreboard.total} points.")
+
+            Button(onClick = {
+                game.scoreboard = Scoreboard()
+
+                state.value = game
+            }) {
+                Text("Play Again")
+            }
+        }
+    }
+
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
@@ -191,7 +239,8 @@ class MainActivity : ComponentActivity() {
         YahtzeeTheme {
             Column {
                 UpperSection()
-                LowerSection()
+                // LowerSection()
+                ScoreInfo()
                 PlayArea()
             }
         }
