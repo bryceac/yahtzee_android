@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                         LowerSection()
                         ScoreSection()
 
-                        if (state.value.isOver) {
+                        if (state.value.gameState == GameState.GAME_OVER) {
                             GameOverArea()
                         } else {
                             PlayArea()
@@ -233,7 +233,7 @@ class MainActivity : ComponentActivity() {
 
             Button(onClick = {
                 game.scoreboard = Scoreboard()
-
+                game.zeroOutDice()
                 state.value = game
             }) {
                 Text("Play Again")

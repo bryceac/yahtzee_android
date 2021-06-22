@@ -3,7 +3,7 @@ package me.brycecampbell.yahtzee
 fun List<Int>.countSequential(): Int {
     val uniqueValues = this.toSortedSet().toIntArray()
 
-    var sequentialSet = mutableSetOf<Int>()
+    val sequentialSet = mutableSetOf<Int>()
 
     for ((index, value) in uniqueValues.withIndex()) {
         if (value != uniqueValues.last()) {

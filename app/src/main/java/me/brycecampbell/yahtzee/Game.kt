@@ -12,16 +12,13 @@ class Game(var scoreboard: Scoreboard = Scoreboard(), var dice: Array<Die> = arr
     val gameState: GameState get() = if (scoreboard.isFilled) { GameState.GAME_OVER } else { GameState.NEW_GAME }
     var rolls = 0
 
-
-    val isOver: Boolean get() = scoreboard.isFilled
-
     val upperPossibilities: HashMap<Int, Int> get() = HashMap(upperKeys.map { number ->
         number to dice.count { it.number == number } * number }.toMap().filter { dict -> Boolean
         !scoreboard.upperSection.containsKey(dict.key)
     })
 
     val lowerPossibilities: HashMap<String, Int> get() {
-        var possibilities: HashMap<String, Int> = hashMapOf()
+        val possibilities: HashMap<String, Int> = hashMapOf()
 
         when (Pair.pair(dice)) {
             Pair.FIVE_OF_A_KIND -> {

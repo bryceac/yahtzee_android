@@ -5,18 +5,15 @@ enum class Combination {
 
     companion object {
         fun combination(roll: Array<Die>): Combination? {
-            var result: Combination?
-
             val numericalValues = roll.map { it.number }
 
-            result = when {
-                Pair.pair(roll) == Pair.THREE_OF_A_KIND && numericalValues.toSet().count() == 2 -> FULL_HOUSE
+            return when {
+                Pair.pair(roll) == Pair.THREE_OF_A_KIND && numericalValues.toSet()
+                    .count() == 2 -> FULL_HOUSE
                 numericalValues.countSequential() == 5 -> LARGE_STRAIGHT
                 numericalValues.countSequential() == 4 -> SMALL_STRAIGHT
                 else -> null
             }
-
-            return result
         }
     }
 }

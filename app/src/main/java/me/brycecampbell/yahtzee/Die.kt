@@ -9,11 +9,10 @@ class Die(n: Int = 0, held: Boolean = false) {
     }
 
     override fun toString(): String {
-        var output = ""
-        if (isHeld) {
-            output = "$number!"
+        var output = if (isHeld) {
+            "$number!"
         } else {
-            output = "$number"
+            "$number"
         }
 
         return output
