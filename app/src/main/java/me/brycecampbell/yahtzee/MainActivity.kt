@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun UpperSection() {
 
-        var game = state.value.clone() as Game
+        val game = state.value.clone() as Game
 
         Row {
             for (key in game.upperKeys) {
@@ -103,7 +103,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun LowerSection() {
 
-        var game = state.value.clone() as Game
+        val game = state.value.clone() as Game
 
         val firstRowKeyIndices = game.lowerKeys.indices.filter { it <= 2 }
         val secondRowKeyIndices = game.lowerKeys.indices.filter { it in 3..6 }
@@ -200,7 +200,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun PlayArea() {
 
-        var game = state.value.clone() as Game
+        val game = state.value.clone() as Game
 
         Column {
             Row {
@@ -227,7 +227,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun GameOverArea() {
-        var game = state.value.clone() as Game
+        val game = state.value.clone() as Game
         Column {
             Text("You scored ${game.scoreboard.total} points.")
 
