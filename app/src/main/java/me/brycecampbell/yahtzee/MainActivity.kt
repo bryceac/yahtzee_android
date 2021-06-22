@@ -51,8 +51,8 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     Column {
                         UpperSection()
-                        // LowerSection()
-                        ScoreInfo()
+                        LowerSection()
+                        // ScoreInfo()
 
                         if (state.value.isOver) {
                             GameOverArea()
@@ -239,8 +239,8 @@ class MainActivity : ComponentActivity() {
         YahtzeeTheme {
             Column {
                 UpperSection()
-                // LowerSection()
-                ScoreInfo()
+                LowerSection()
+                // ScoreInfo()
                 PlayArea()
             }
         }
