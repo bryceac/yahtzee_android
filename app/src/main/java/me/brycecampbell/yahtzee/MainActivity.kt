@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
                         val points = game.scoreboard.upperSection[key]!!
 
                         Text("$points")
-                    } else if (game.rolls > 0) {
+                    } else if (game.rolls > 0 && game.upperPossibilities[key] != null) {
                         val points = game.upperPossibilities[key]!!
 
                         Button(onClick = {
@@ -108,7 +108,7 @@ class MainActivity : ComponentActivity() {
                         Text(key)
 
                         if (game.scoreboard.lowerSection[key] != null) {
-                            val points: Int = game.scoreboard.upperSection[key]!!
+                            val points: Int = game.scoreboard.lowerSection[key]!!
 
                             Text("$points")
                         } else if (game.rolls > 0) {
@@ -135,7 +135,7 @@ class MainActivity : ComponentActivity() {
                         Text(key)
 
                         if (game.scoreboard.lowerSection[key] != null) {
-                            val points: Int = game.scoreboard.upperSection[key]!!
+                            val points: Int = game.scoreboard.lowerSection[key]!!
 
                             Text("$points")
                         } else if (game.rolls > 0) {
