@@ -3,8 +3,7 @@ package me.brycecampbell.yahtzee
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -13,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import me.brycecampbell.yahtzee.ui.theme.YahtzeeTheme
 
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             YahtzeeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Column {
+                    Column(modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween) {
                         UpperSection()
                         LowerSection()
                         ScoreSection()
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
 
         val game = state.value.clone() as Game
 
-        Row {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             for (key in game.upperKeys) {
                 Column {
                     Text("$key")
@@ -83,11 +83,10 @@ class MainActivity : ComponentActivity() {
                         val points = game.upperPossibilities[key]!!
 
                         Button(onClick = {
-                            game.scoreboard.upperSection[key] = points
-
                             if (Pair.pair(game.dice) == Pair.FIVE_OF_A_KIND && game.scoreboard.lowerSection[game.lowerKeys.last()] == 50) {
                                 game.scoreboard.numberOfYahtzeeBonsuses += 1
                             }
+                            game.scoreboard.upperSection[key] = points
                             game.rolls = 0
                             game.releaseDice()
                             state.value = game
@@ -109,7 +108,7 @@ class MainActivity : ComponentActivity() {
         val secondRowKeyIndices = game.lowerKeys.indices.filter { it in 3..6 }
 
         Column {
-            Row {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 for (index in firstRowKeyIndices) {
                     val key = game.lowerKeys[index]
 
@@ -124,10 +123,10 @@ class MainActivity : ComponentActivity() {
                             val points: Int = game.lowerPossibilities[key]!!
 
                             Button(onClick = {
-                                game.scoreboard.lowerSection[key] = points
                                 if (Pair.pair(game.dice) == Pair.FIVE_OF_A_KIND && game.scoreboard.lowerSection[game.lowerKeys.last()] == 50) {
                                     game.scoreboard.numberOfYahtzeeBonsuses += 1
                                 }
+                                game.scoreboard.lowerSection[key] = points
                                 game.rolls = 0
                                 game.releaseDice()
                                 state.value = game
@@ -139,7 +138,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            Row {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 for (index in secondRowKeyIndices) {
                     val key = game.lowerKeys[index]
 
@@ -154,11 +153,10 @@ class MainActivity : ComponentActivity() {
                             val points = game.lowerPossibilities[key]!!
 
                             Button(onClick = {
-                                game.scoreboard.lowerSection[key] = points
                                 if (Pair.pair(game.dice) == Pair.FIVE_OF_A_KIND && game.scoreboard.lowerSection[game.lowerKeys.last()] == 50) {
                                     game.scoreboard.numberOfYahtzeeBonsuses += 1
                                 }
-
+                                game.scoreboard.lowerSection[key] = points
                                 game.rolls = 0
                                 game.releaseDice()
                                 state.value = game
@@ -174,7 +172,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ScoreSection() {
-        Row {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Column {
                 Text("Upper Score")
                 Text("${state.value.scoreboard.upperScore}")
@@ -189,7 +187,9 @@ class MainActivity : ComponentActivity() {
                 Text("Lower Score")
                 Text("${state.value.scoreboard.lowerScore}")
             }
+        }
 
+        Row {
             Column {
                 Text("${getString(R.string.five_of_kind_key)} Bonuses")
                 Text("${state.value.scoreboard.numberOfYahtzeeBonsuses}")
@@ -203,7 +203,7 @@ class MainActivity : ComponentActivity() {
         val game = state.value.clone() as Game
 
         Column {
-            Row {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 for (die in game.dice) {
                     Button(onClick = {
                         die.isHeld = !die.isHeld
@@ -249,7 +249,7 @@ class MainActivity : ComponentActivity() {
             Column {
                 UpperSection()
                 LowerSection()
-                ScoreSection()
+                // ScoreSection()
                 PlayArea()
             }
         }
