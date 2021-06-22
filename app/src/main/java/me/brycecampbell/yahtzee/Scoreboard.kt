@@ -18,8 +18,8 @@ class Scoreboard(upper: HashMap<Int, Int> = HashMap(), lower: HashMap<String, In
     val gotUpperBonus: Boolean get() = upperScore >= 63
 
     val total: Int get() {
-        var upperTotal = if (gotUpperBonus) { upperScore + 35 } else { upperScore }
-        var lowerTotal = if (multipleYahtzees) { (100 * numberOfYahtzeeBonsuses) + lowerScore } else { lowerScore }
+        val upperTotal = if (gotUpperBonus) { upperScore + 35 } else { upperScore }
+        val lowerTotal = if (multipleYahtzees) { (100 * numberOfYahtzeeBonsuses) + lowerScore } else { lowerScore }
 
         return upperTotal + lowerTotal
     }
