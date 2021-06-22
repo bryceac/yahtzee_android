@@ -9,9 +9,9 @@ fun List<Int>.countSequential(): Int {
         if (value != uniqueValues.last()) {
             val nextIndex = index + 1
             if (nextIndex <= uniqueValues.count()-1) {
-                val nextNumber = uniqueValues[index+1]
+                val nextNumber = uniqueValues[nextIndex]
 
-                if (nextNumber-value == 1) {
+                if (nextNumber != uniqueValues.last() && nextNumber-value == 1) {
                     sequentialSet.add(value)
                     sequentialSet.add(nextNumber)
                 }
