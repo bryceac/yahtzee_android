@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                     Column {
                         UpperSection()
                         LowerSection()
-                        // ScoreInfo()
+                        ScoreSection()
 
                         if (state.value.isOver) {
                             GameOverArea()
@@ -162,28 +162,26 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ScoreInfo() {
-        var game = state.value.clone() as Game
-
+    fun ScoreSection() {
         Row {
             Column {
                 Text("Upper Score")
-                Text("${game.scoreboard.upperScore}")
+                Text("${state.value.scoreboard.upperScore}")
             }
 
             Column {
                 Text("Upper Bonus")
-                Text(if (game.scoreboard.gotUpperBonus) { "35" } else { "0" })
+                Text(if (state.value.scoreboard.gotUpperBonus) { "35" } else { "0" })
             }
 
             Column {
                 Text("Lower Score")
-                Text("${game.scoreboard.lowerScore}")
+                Text("${state.value.scoreboard.lowerScore}")
             }
 
             Column {
                 Text("${getString(R.string.five_of_kind_key)} Bonuses")
-                Text("${game.scoreboard.numberOfYahtzeeBonsuses}")
+                Text("${state.value.scoreboard.numberOfYahtzeeBonsuses}")
             }
         }
     }
@@ -207,6 +205,7 @@ class MainActivity : ComponentActivity() {
 
             if (state.value.rolls < 3) {
                 Button(onClick = {
+                    var game = state.value
                     game.roll()
                     state.value = game
                 }) {
@@ -240,7 +239,7 @@ class MainActivity : ComponentActivity() {
             Column {
                 UpperSection()
                 LowerSection()
-                //  ScoreInfo()
+                ScoreSection()
                 PlayArea()
             }
         }
