@@ -240,7 +240,7 @@ class MainActivity : ComponentActivity() {
             Column {
                 UpperSection()
                 LowerSection()
-                // ScoreInfo()
+                //  ScoreInfo()
                 PlayArea()
             }
         }
