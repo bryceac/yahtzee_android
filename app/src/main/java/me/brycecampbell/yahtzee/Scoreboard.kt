@@ -5,12 +5,12 @@ class Scoreboard(upper: HashMap<Int, Int> = HashMap(), lower: HashMap<String, In
     var lowerSection: HashMap<String, Int> = lower
     var numberOfYahtzeeBonsuses: Int = bonuses
 
-    val upperScore: Int get() = upperSection.values.reduce { points: Int, score: Int ->
-            return points + score
+    val upperScore: Int get() = upperSection.values.reduce { points, score ->
+            points + score
         }
 
-    val lowerScore: Int get() = lowerSection.values.reduce { points: Int, score: Int ->
-        return points + score
+    val lowerScore: Int get() = lowerSection.values.reduce { points, score ->
+        points + score
     }
 
     val multipleYahtzees: Boolean get() = numberOfYahtzeeBonsuses > 0
