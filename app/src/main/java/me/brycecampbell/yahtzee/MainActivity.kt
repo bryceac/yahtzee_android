@@ -208,7 +208,7 @@ class MainActivity : ComponentActivity() {
                     Button(onClick = {
                         die.isHeld = !die.isHeld
                         state.value = game
-                    }) {
+                    }, enabled = game.rolls > 0) {
                         Text(if (die.number > 0) { "$die" } else { "?" })
                     }
                 }
