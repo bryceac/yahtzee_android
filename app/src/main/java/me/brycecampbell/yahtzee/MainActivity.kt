@@ -79,7 +79,8 @@ class MainActivity : ComponentActivity() {
 
                         Button(onClick = {
                             game.scoreboard.upperSection[key] = points
-
+                            game.rolls = 0
+                            game.releaseDice()
                             state.value = game
                         }) {
                             Text("$points")
@@ -115,7 +116,8 @@ class MainActivity : ComponentActivity() {
 
                             Button(onClick = {
                                 game.scoreboard.lowerSection[key] = points
-
+                                game.rolls = 0
+                                game.releaseDice()
                                 state.value = game
                             }) {
                                 Text("$points")
@@ -141,7 +143,8 @@ class MainActivity : ComponentActivity() {
 
                             Button(onClick = {
                                 game.scoreboard.lowerSection[key] = points
-
+                                game.rolls = 0
+                                game.releaseDice()
                                 state.value = game
                             }) {
                                 Text("$points")
