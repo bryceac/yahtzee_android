@@ -52,6 +52,7 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     Column {
                         UpperSection()
+                        LowerSection()
                         PlayArea()
                     }
                 }
@@ -87,6 +88,69 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    @Composable
+    fun LowerSection() {
+
+        var game = state.value.clone() as Game
+
+        val firstRowKeyIndices = game.lowerKeys.indices.filter { it <= 2 }
+        val secondRowKeyIndices = game.lowerKeys.indices.filter { it in 3..6 }
+
+        Column {
+            Row {
+                for (index in firstRowKeyIndices) {
+                    val key = game.lowerKeys[index]
+
+                    Column {
+                        Text("$key")
+
+                        if (game.scoreboard.lowerSection[key] != null) {
+                            val points = game.scoreboard.upperSection[key]!!
+
+                            Text("$points")
+                        } else if (game.rolls > 0) {
+                            val points = game.lowerPossibilities[key]!!
+
+                            Button(onClick = {
+                                game.scoreboard.lowerSection[key] = points
+
+                                state.value = game
+                            }) {
+                                Text("$points")
+                            }
+                        }
+                    }
+                }
+            }
+
+            Row {
+                for (index in secondRowKeyIndices) {
+                    val key = game.lowerKeys[index]
+
+                    Column {
+                        Text("$key")
+
+                        if (game.scoreboard.lowerSection[key] != null) {
+                            val points = game.scoreboard.upperSection[key]!!
+
+                            Text("$points")
+                        } else if (game.rolls > 0) {
+                            val points = game.lowerPossibilities[key]!!
+
+                            Button(onClick = {
+                                game.scoreboard.lowerSection[key] = points
+
+                                state.value = game
+                            }) {
+                                Text("$points")
+                            }
+                        }
+                    }
+                }
+            }
+        } // end main column
     }
 
     @Composable
