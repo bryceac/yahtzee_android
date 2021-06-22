@@ -205,7 +205,6 @@ class MainActivity : ComponentActivity() {
 
             if (state.value.rolls < 3) {
                 Button(onClick = {
-                    var game = state.value
                     game.roll()
                     state.value = game
                 }) {
