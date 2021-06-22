@@ -187,6 +187,7 @@ class MainActivity : ComponentActivity() {
         YahtzeeTheme {
             Column {
                 UpperSection()
+                LowerSection()
                 PlayArea()
             }
         }
