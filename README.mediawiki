@@ -1,0 +1,50 @@
+=Yahtzee=
+
+'''Author:''' Bryce C
+
+'''Description:''' An implementation of Yahtzee for Android using JetPack Compose.
+
+'''Version:''' 1.0-alpha
+
+
+==Notes==
+
+This project has not been tested on real hardware, due to project settings being for later than Android 9 and unknown minimum for anything other 
+than possibly the minimum requirement of Android 5 for JetPack Compose, which I do not know if it will change when it finally gets a stable release.
+
+However, this <strong>should</strong> work on Android 10 and later.
+
+The project itself was to test the waters of getting back into Android development by doing things I was comfortable with in Swift with SwiftUI, such as changing things 
+based on the state of a single item that housed everything necessary, so this is also my first time testing the waters with Kotlin.
+
+===Questions===
+
+<ol>
+<li>
+<dl>
+<dt style="font-weight:bold">Will you release an APK for this application?</dt>
+<dd><p>Likely not.</p> 
+<p>While I first dove into mobile app programming with Android, due to being more used to Java than Objective-C, which were 
+the languages that were originally used for Android and iOS, most of my experience is now with Swift and Rust and I can only test on iOS devices now, 
+which means I cannot deliver anything of quality to the platform.</p>
+<p>The bigger reason for not releasing an APK though is due to the possibility of troubles from Hasbro and/or other entities, so 
+while I can certainly ask others to test the application, I cannot distribute to places like Amazon App Store and Google Play.</p>
+</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt style="font-weight:bold">As you are most comfortable with Swift and iOS, will you be releasing an app for that platform?</dt>
+<dd>
+<p>Except for the device testing, which I can do with my current equipment, things are about the same as the situation with Android.</p>
+<p>However, I have built a Swift version prior to this that utilizes code from <a href="https://github.com/bryceac/yahtzee>the original project</a> that 
+I did post up on Github, which needs to be updated.</p>
+<p>As such I will not be putting that up for the public to see.</p>
+</dd>
+</dl>
+</li>
+</ol>
+
+===Misc.===
+
+Feel free to check out the code if you need help finding how to change the state of multiple objects at once, as I likely will not update this code.
